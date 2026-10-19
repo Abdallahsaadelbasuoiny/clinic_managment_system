@@ -25,7 +25,7 @@ class RoleAuthorizationTest extends TestCase
         Sanctum::actingAs($admin);
 
         $response = $this->postJson('/api/admin/doctors', [
-            'name'     => 'name 2',
+            'name'     => 'name supplied by client',
             'email'    => 'doctor2@test.com',
             'phone'    => '01011113333',
             'password' => 'doctorpass123',
@@ -75,7 +75,6 @@ class RoleAuthorizationTest extends TestCase
         Sanctum::actingAs($admin);
 
         $response = $this->postJson('/api/admin/receptionists', [
-            'name'     => 'name 5',
             'email'    => 'recep5@test.com',
             'phone'    => '01055556666',
             'password' => 'receppass123',
@@ -102,8 +101,8 @@ class RoleAuthorizationTest extends TestCase
 
         Sanctum::actingAs($receptionist);
 
-        $response = $this->postJson('/api/receptionist/patients', [
-            'name'          => 'name 6',
+        $response = $this->postJson('/api/patients', [
+            'name'          => 'name supplied by client',
             'phone'         => '01122223333',
             'national_id'   => '29001011234567',
             'date_of_birth' => '1990-01-01',
@@ -111,31 +110,47 @@ class RoleAuthorizationTest extends TestCase
         ]);
 
         $response->assertStatus(201)
-            ->assertJsonPath('data.name', 'name 6');
+            ->assertJsonPath('data.name', 'name 1');
 
         $this->assertDatabaseHas('patients', [
-            'name'  => 'name 6',
-            'phone' => '01122223333',
+            'name'               => 'name 1',
+            'phone'              => '01122223333',
+            'created_by_user_id' => $receptionist->id,
         ]);
     }
 
-    public function test_doctor_cannot_create_patient_profile(): void
+    public function test_admin_can_create_patient_profile_and_is_saved_as_creator(): void
     {
-        $doctor = User::create([
+        $this->assertStaffRoleCanCreatePatient(User::ROLE_ADMIN);
+    }
+
+    public function test_doctor_can_create_patient_profile_and_is_saved_as_creator(): void
+    {
+        $this->assertStaffRoleCanCreatePatient(User::ROLE_DOCTOR);
+    }
+
+    private function assertStaffRoleCanCreatePatient(string $role): void
+    {
+        $staff = User::create([
             'name'      => 'name 7',
-            'email'     => 'doc@test.com',
+            'email'     => $role . '@test.com',
             'password'  => Hash::make('secret123'),
-            'role'      => User::ROLE_DOCTOR,
+            'role'      => $role,
             'is_active' => true,
         ]);
 
-        Sanctum::actingAs($doctor);
+        Sanctum::actingAs($staff);
 
-        $response = $this->postJson('/api/receptionist/patients', [
-            'name'  => 'name 8',
+        $response = $this->postJson('/api/patients', [
             'phone' => '01199998888',
         ]);
 
-        $response->assertStatus(403);
+        $response->assertCreated()
+            ->assertJsonPath('data.created_by_user_id', $staff->id);
+
+        $this->assertDatabaseHas('patients', [
+            'phone' => '01199998888',
+            'created_by_user_id' => $staff->id,
+        ]);
     }
 }

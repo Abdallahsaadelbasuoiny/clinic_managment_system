@@ -18,6 +18,9 @@
             background-color: #f8fafc;
             color: #0f172a;
         }
+        button:not(:disabled) {
+            cursor: pointer;
+        }
         /* Anti-AI Slop Rules from DESIGN_RULES.md: No drop shadows on static containers, clean 1px borders */
         .ui-card {
             background-color: #ffffff;
@@ -108,7 +111,7 @@
 
                 <!-- Navigation Links -->
                 <nav class="hidden md:flex items-center gap-4 text-sm font-medium text-slate-600">
-                    <button onclick="switchView('landing')" class="hover:text-teal-700 py-1 transition-colors">الرئيسية</button>
+                    <a href="/" class="hover:text-teal-700 py-1 transition-colors">الرئيسية</a>
                     <a href="#about-section" onclick="switchView('landing')" class="hover:text-teal-700 py-1 transition-colors">عن العيادة</a>
                     <a href="#services-section" onclick="switchView('landing')" class="hover:text-teal-700 py-1 transition-colors">الخدمات الطبية</a>
 
@@ -162,18 +165,12 @@
 
             <!-- Hero Section -->
             <section id="home-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-teal-50 text-teal-800 border border-teal-200 mb-6">
-                    <span>المنظومة الطبية الرقمية المتكاملة</span>
-                    <span class="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
-                    <span>معايير جودة الرعاية الصحية 2026</span>
-                </div>
-
                 <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight max-w-4xl mx-auto mb-6">
-                    رعاية طبية متخصصة وإدارة عيادات ذكية ترتكز على صحة المريض
+                    إدارة خدمات المركز الطبي من مكان واحد
                 </h1>
 
                 <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto mb-8 leading-relaxed">
-                    توفر عيادة Clinic 1 بيئة استشفائية متطورة تشمل حجز المواعيد الفورية والحالات المستعجلة، إدارة السجلات الطبية بدقة، ونظام فواتير شفاف ومحكم.
+                    تسجيل المرضى، تنظيم المواعيد، متابعة السجلات الطبية، وإدارة الفواتير والمدفوعات.
                 </p>
 
                 <div class="flex flex-wrap justify-center items-center gap-3">
@@ -188,25 +185,6 @@
                     </a>
                 </div>
 
-                <!-- Metrics Strip (Clean, No AI Blobs) -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-16 max-w-4xl mx-auto pt-10 border-t border-slate-200 text-right">
-                    <div class="p-4 bg-white border border-slate-200 rounded-lg">
-                        <span class="text-2xl font-bold text-slate-900 block mb-1">15+</span>
-                        <span class="text-xs text-slate-500 font-medium">عيادة تخصصية متكاملة</span>
-                    </div>
-                    <div class="p-4 bg-white border border-slate-200 rounded-lg">
-                        <span class="text-2xl font-bold text-slate-900 block mb-1">24/7</span>
-                        <span class="text-xs text-slate-500 font-medium">استقبال وحالات مستعجلة</span>
-                    </div>
-                    <div class="p-4 bg-white border border-slate-200 rounded-lg">
-                        <span class="text-2xl font-bold text-slate-900 block mb-1">12,400+</span>
-                        <span class="text-xs text-slate-500 font-medium">ملف مريض إلكتروني مؤمّن</span>
-                    </div>
-                    <div class="p-4 bg-white border border-slate-200 rounded-lg">
-                        <span class="text-2xl font-bold text-slate-900 block mb-1">99.4%</span>
-                        <span class="text-xs text-slate-500 font-medium">معدل الدقة ورضا المراجعين</span>
-                    </div>
-                </div>
             </section>
 
             <!-- MERGED ABOUT US SECTION: Unified with Home page -->
@@ -232,7 +210,7 @@
                         </div>
                         <!-- Quality Point 2 -->
                         <div class="p-6 bg-slate-50 border border-slate-200 rounded-lg">
-                            <h3 class="text-base font-bold text-slate-900 mb-2">حوكمة مالية وفواتير دقيقة</h3>
+                            <h3 class="text-base font-bold text-slate-900 mb-2">حكومه مالية وفواتير دقيقة</h3>
                             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
                                 نظام فواتير يتيح للاستقبال تطبيق الخصومات المعتمدة قبل السداد، وقفل الفاتورة برمجياً بصيغة القراءة فقط (Read-Only) فور الدفع لحماية الحسابات، مع إتاحة ميزة الاسترجاع المنظم (Refund).
                             </p>
@@ -278,7 +256,7 @@
                     </div>
                     <div class="p-5 ui-card border-teal-200 bg-teal-50/30">
                         <div class="flex items-center justify-between mb-2">
-                            <h4 class="font-bold text-teal-900">قسم الحالات المستعجلة (Urgent)</h4>
+                            <h4 class="font-bold text-teal-900">قسم الحالات الحرجه (Urgent)</h4>
                             <span class="text-[11px] font-semibold px-2 py-0.5 rounded bg-rose-100 text-rose-800">أولوية فورية</span>
                         </div>
                         <p class="text-xs text-slate-600 leading-relaxed">مسار فوري مخصص للحالات الحرجة والمستعجلة لتخطي قوائم الانتظار تحت إشراف طاقم طوارئ متخصص.</p>
@@ -308,6 +286,49 @@
             <!-- Global Alert Container -->
             <div id="dash-alert" class="hidden mb-6 p-4 rounded-lg text-sm border"></div>
 
+            <!-- Patient registration shared by receptionists, administrators, and doctors -->
+            <div id="patient-registration-panel" class="hidden mb-8">
+                <div class="ui-card p-6">
+                    <div class="border-b border-slate-200 pb-3 mb-4 flex items-center justify-between">
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-base">تسجيل مريض جديد</h3>
+                            <p class="text-xs text-slate-500">سيتم ربط ملف المريض تلقائيًا بحساب الموظف الذي سجّله.</p>
+                        </div>
+                        <span class="text-xs font-medium px-2 py-0.5 rounded bg-slate-100 text-slate-700">للاستقبال والمدير والطبيب</span>
+                    </div>
+                    <form id="create-patient-form" onsubmit="handleCreatePatient(event)" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">رقم الهاتف</label>
+                            <input type="text" id="pat-phone" required placeholder="01234567890" class="ui-input">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">الرقم القومي</label>
+                            <input type="text" id="pat-national-id" placeholder="14 رقم" class="ui-input">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">تاريخ الميلاد</label>
+                            <input type="date" id="pat-dob" class="ui-input">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">النوع</label>
+                            <select id="pat-gender" class="ui-input">
+                                <option value="male">ذكر</option>
+                                <option value="female">أنثى</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">العنوان</label>
+                            <input type="text" id="pat-address" placeholder="المدينة، المحافظة" class="ui-input">
+                        </div>
+                        <div class="sm:col-span-2 md:col-span-3 pt-2">
+                            <button type="submit" class="ui-btn-primary py-2.5 px-6">
+                                <span>حفظ وتسجيل المريض</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
             <!-- ==================================================== -->
             <!-- ADMIN MODULE: Doctor & Receptionist User Creation    -->
             <!-- ==================================================== -->
@@ -329,10 +350,6 @@
                             <p class="text-xs text-slate-500">خاص بالمدير فقط - إضافة طبيب إلى كادر العيادة</p>
                         </div>
                         <form id="create-doctor-form" onsubmit="handleCreateDoctor(event)" class="space-y-4">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">اسم الدكتور</label>
-                                <input type="text" id="doc-name" required placeholder="مثال: name 3" class="ui-input">
-                            </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-700 mb-1">البريد الإلكتروني</label>
                                 <input type="email" id="doc-email" required placeholder="doctor@clinic.com" class="ui-input">
@@ -358,10 +375,6 @@
                             <p class="text-xs text-slate-500">خاص بالمدير فقط - تعيين موظف استقبال جديد</p>
                         </div>
                         <form id="create-receptionist-form" onsubmit="handleCreateReceptionist(event)" class="space-y-4">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">اسم موظف الاستقبال</label>
-                                <input type="text" id="rec-name" required placeholder="مثال: name 4" class="ui-input">
-                            </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-700 mb-1">البريد الإلكتروني</label>
                                 <input type="email" id="rec-email" required placeholder="receptionist@clinic.com" class="ui-input">
@@ -414,54 +427,9 @@
                 <div class="p-4 bg-teal-50 border border-teal-200 rounded-lg flex items-center justify-between">
                     <div>
                         <h3 class="font-bold text-teal-900 text-sm">مكتب الاستقبال (Reception Desk)</h3>
-                        <p class="text-xs text-teal-700">أنت المسؤول عن تسجيل المرضى الجدد، جدولة الحجوزات (العادية والمستعجلة)، وإدارة الفواتير والخصومات والاسترجاع.</p>
+                        <p class="text-xs text-teal-700">يمكنك تسجيل المرضى الجدد وربط ملفاتهم بحسابك، وجدولة الحجوزات (العادية والمستعجلة)، وإدارة الفواتير والخصومات والاسترجاع.</p>
                     </div>
                     <span class="text-xs font-semibold px-2.5 py-1 rounded bg-teal-200/60 text-teal-900">Receptionist Only</span>
-                </div>
-
-                <!-- Section A: Register New Patient Form -->
-                <div class="ui-card p-6">
-                    <div class="border-b border-slate-200 pb-3 mb-4 flex items-center justify-between">
-                        <div>
-                            <h3 class="font-bold text-slate-900 text-base">تسجيل مريض جديد</h3>
-                            <p class="text-xs text-slate-500">خاص بموظف الاستقبال - إنشاء ملف المريض والسجل الطبي</p>
-                        </div>
-                        <span class="text-xs font-medium px-2 py-0.5 rounded bg-slate-100 text-slate-700">صلاحية الاستقبال</span>
-                    </div>
-                    <form id="create-patient-form" onsubmit="handleCreatePatient(event)" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">اسم المريض ثلاثي</label>
-                            <input type="text" id="pat-name" required placeholder="مثال: name 5" class="ui-input">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">رقم الهاتف</label>
-                            <input type="text" id="pat-phone" required placeholder="01234567890" class="ui-input">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">الرقم القومي</label>
-                            <input type="text" id="pat-national-id" placeholder="14 رقم" class="ui-input">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">تاريخ الميلاد</label>
-                            <input type="date" id="pat-dob" class="ui-input">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">النوع</label>
-                            <select id="pat-gender" class="ui-input">
-                                <option value="male">ذكر</option>
-                                <option value="female">أنثى</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">العنوان</label>
-                            <input type="text" id="pat-address" placeholder="المدينة، المحافظة" class="ui-input">
-                        </div>
-                        <div class="sm:col-span-2 md:col-span-3 pt-2">
-                            <button type="submit" class="ui-btn-primary py-2.5 px-6">
-                                <span>حفظ وتسجيل المريض</span>
-                            </button>
-                        </div>
-                    </form>
                 </div>
 
                 <!-- Section B: Appointments Manager with Stepper and Urgent Flag -->
@@ -624,6 +592,88 @@
                     <h3 class="font-bold text-slate-900 text-base mb-4">قائمة الكشوفات والحالات</h3>
                     <div id="doctor-appointments-list" class="space-y-3">
                         <p class="text-slate-400 text-xs">جاري التحميل...</p>
+                    </div>
+                </div>
+
+                <div class="ui-card p-6">
+                    <h3 class="font-bold text-slate-900 text-base mb-2">تسجيل زيارة طبية</h3>
+                    <p class="text-xs text-slate-500 mb-4">اختر موعدًا تابعًا لك، ثم سجّل الشكوى والتشخيص وخطة العلاج.</p>
+                    <form id="medical-record-form" onsubmit="handleCreateMedicalRecord(event)" class="space-y-4">
+                        <div>
+                            <label for="record-appointment-id" class="block text-xs font-semibold text-slate-700 mb-1">موعد المريض</label>
+                            <select id="record-appointment-id" required class="ui-input"></select>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="record-chief-complaint" class="block text-xs font-semibold text-slate-700 mb-1">الشكوى الرئيسية</label>
+                                <textarea id="record-chief-complaint" rows="2" class="ui-input"></textarea>
+                            </div>
+                            <div>
+                                <label for="record-medical-history" class="block text-xs font-semibold text-slate-700 mb-1">التاريخ المرضي</label>
+                                <textarea id="record-medical-history" rows="2" class="ui-input"></textarea>
+                            </div>
+                            <div>
+                                <label for="record-examination" class="block text-xs font-semibold text-slate-700 mb-1">الفحص السريري</label>
+                                <textarea id="record-examination" rows="2" class="ui-input"></textarea>
+                            </div>
+                            <div>
+                                <label for="record-diagnosis" class="block text-xs font-semibold text-slate-700 mb-1">التشخيص</label>
+                                <textarea id="record-diagnosis" rows="2" class="ui-input"></textarea>
+                            </div>
+                            <div>
+                                <label for="record-treatment-plan" class="block text-xs font-semibold text-slate-700 mb-1">خطة العلاج</label>
+                                <textarea id="record-treatment-plan" rows="2" class="ui-input"></textarea>
+                            </div>
+                            <div>
+                                <label for="record-follow-up" class="block text-xs font-semibold text-slate-700 mb-1">موعد المتابعة</label>
+                                <input id="record-follow-up" type="datetime-local" class="ui-input">
+                            </div>
+                        </div>
+                        <button type="submit" class="ui-btn-primary py-2 px-4">حفظ السجل الطبي</button>
+                    </form>
+
+                    <div id="clinical-workflow-panel" class="hidden mt-6 border-t border-slate-200 pt-6 space-y-6">
+                        <p id="clinical-record-reference" class="text-sm font-semibold text-slate-800"></p>
+                        <form onsubmit="handleCreatePrescription(event)" class="space-y-3">
+                            <h4 class="font-bold text-slate-800 text-sm">وصفة طبية</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <input id="prescription-medicine" class="ui-input" placeholder="اسم الدواء" required>
+                                <input id="prescription-dosage" class="ui-input" placeholder="الجرعة" required>
+                                <input id="prescription-frequency" class="ui-input" placeholder="عدد مرات الاستخدام" required>
+                                <input id="prescription-duration" class="ui-input" placeholder="مدة الاستخدام" required>
+                                <input id="prescription-quantity" type="number" min="1" class="ui-input" placeholder="الكمية" required>
+                                <input id="prescription-instructions" class="ui-input" placeholder="تعليمات إضافية">
+                            </div>
+                            <textarea id="prescription-notes" rows="2" class="ui-input" placeholder="ملاحظات الوصفة"></textarea>
+                            <button type="submit" class="ui-btn-secondary py-2 px-4">إصدار الوصفة</button>
+                        </form>
+
+                        <form onsubmit="handleCreateDiagnosticOrder(event)" class="space-y-3">
+                            <h4 class="font-bold text-slate-800 text-sm">طلب تحليل أو أشعة</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <select id="diagnostic-type" class="ui-input" required>
+                                    <option value="lab">تحليل</option>
+                                    <option value="imaging">أشعة</option>
+                                </select>
+                                <input id="diagnostic-test-name" class="ui-input" placeholder="اسم الفحص" required>
+                                <input id="diagnostic-instructions" class="ui-input" placeholder="تعليمات">
+                            </div>
+                            <button type="submit" class="ui-btn-secondary py-2 px-4">إرسال طلب الفحص</button>
+                        </form>
+
+                        <form onsubmit="handleUpdateDiagnosticOrder(event)" class="space-y-3">
+                            <h4 class="font-bold text-slate-800 text-sm">تسجيل نتيجة الفحص</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <input id="diagnostic-order-id" type="number" min="1" class="ui-input" placeholder="رقم طلب الفحص" required>
+                                <select id="diagnostic-order-status" class="ui-input" required>
+                                    <option value="in_progress">قيد التنفيذ</option>
+                                    <option value="completed">مكتمل</option>
+                                    <option value="cancelled">ملغي</option>
+                                </select>
+                                <textarea id="diagnostic-result" rows="2" class="ui-input" placeholder="النتيجة"></textarea>
+                            </div>
+                            <button type="submit" class="ui-btn-secondary py-2 px-4">حفظ حالة ونتيجة الفحص</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -793,6 +843,8 @@
         let authToken = localStorage.getItem('clinic_auth_token') || null;
         let cachedPatients = [];
         let cachedDoctors = [];
+        let cachedDoctorAppointments = [];
+        let activeMedicalRecordId = null;
 
         // Status Stepper constants
         const STATUS_MAP = {
@@ -906,7 +958,7 @@
             try {
                 const res = await fetch('/api/auth/me', {
                     headers: {
-                        'Authorization': `Bearer ${authToken}`,
+                        'Authorization': 'Bearer ' + authToken,
                         'Accept': 'application/json',
                     }
                 });
@@ -927,7 +979,7 @@
                 fetch('/api/auth/logout', {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${authToken}`,
+                        'Authorization': 'Bearer ' + authToken,
                         'Accept': 'application/json',
                     }
                 }).catch(() => {});
@@ -965,12 +1017,14 @@
             const adminMod = document.getElementById('admin-module');
             const recepMod = document.getElementById('receptionist-module');
             const docMod = document.getElementById('doctor-module');
+            const patientRegistrationPanel = document.getElementById('patient-registration-panel');
             const titleEl = document.getElementById('dash-title');
             const subtitleEl = document.getElementById('dash-subtitle');
 
             adminMod.classList.add('hidden');
             recepMod.classList.add('hidden');
             docMod.classList.add('hidden');
+            patientRegistrationPanel.classList.add('hidden');
 
             const role = currentUser.role;
 
@@ -978,16 +1032,21 @@
                 titleEl.textContent = 'لوحة إدارة النظام الطبي (Admin Panel)';
                 subtitleEl.textContent = 'إدارة الحسابات الطبية، إنشاء بروفايلات الأطباء وموظفي الاستقبال، والإشراف العام.';
                 adminMod.classList.remove('hidden');
+                patientRegistrationPanel.classList.remove('hidden');
                 loadAdminStaffLists();
+                loadPatients();
             } else if (role === 'receptionist') {
                 titleEl.textContent = 'مكتب الاستقبال وشؤون المرضى (Receptionist Desk)';
                 subtitleEl.textContent = 'تسجيل المرضى الجدد، إدارة المواعيد العادية والمستعجلة، ومتابعة الفواتير والخصومات والاسترجاع.';
                 recepMod.classList.remove('hidden');
+                patientRegistrationPanel.classList.remove('hidden');
                 loadReceptionistData();
             } else if (role === 'doctor') {
                 titleEl.textContent = 'بوابة الطبيب المعالج (Doctor Portal)';
                 subtitleEl.textContent = 'استعراض مواعيد الكشف وجدول العيادة مع تمييز الحالات المستعجلة فوراً.';
                 docMod.classList.remove('hidden');
+                patientRegistrationPanel.classList.remove('hidden');
+                loadPatients();
                 loadDoctorAppointments();
             } else {
                 titleEl.textContent = 'بوابة المريض (Patient Portal)';
@@ -1047,7 +1106,6 @@
         // Admin: Create Doctor
         async function handleCreateDoctor(e) {
             e.preventDefault();
-            const name = document.getElementById('doc-name').value;
             const email = document.getElementById('doc-email').value;
             const phone = document.getElementById('doc-phone').value;
             const password = document.getElementById('doc-password').value;
@@ -1056,11 +1114,11 @@
                 const res = await fetch('/api/admin/doctors', {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${authToken}`,
+                        'Authorization': 'Bearer ' + authToken,
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                     },
-                    body: JSON.stringify({ name, email, phone, password })
+                    body: JSON.stringify({ email, phone, password })
                 });
                 const data = await res.json();
                 if (!res.ok) throw new Error(data.message || 'فشل إنشاء حساب الطبيب');
@@ -1076,7 +1134,6 @@
         // Admin: Create Receptionist
         async function handleCreateReceptionist(e) {
             e.preventDefault();
-            const name = document.getElementById('rec-name').value;
             const email = document.getElementById('rec-email').value;
             const phone = document.getElementById('rec-phone').value;
             const password = document.getElementById('rec-password').value;
@@ -1085,11 +1142,11 @@
                 const res = await fetch('/api/admin/receptionists', {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${authToken}`,
+                        'Authorization': 'Bearer ' + authToken,
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                     },
-                    body: JSON.stringify({ name, email, phone, password })
+                    body: JSON.stringify({ email, phone, password })
                 });
                 const data = await res.json();
                 if (!res.ok) throw new Error(data.message || 'فشل إنشاء حساب موظف الاستقبال');
@@ -1115,7 +1172,7 @@
         async function loadPatients() {
             try {
                 const res = await fetch('/api/patients', {
-                    headers: { 'Authorization': `Bearer ${authToken}`, 'Accept': 'application/json' }
+                    headers: { 'Authorization': 'Bearer ' + authToken, 'Accept': 'application/json' }
                 });
                 if (res.ok) {
                     const data = await res.json();
@@ -1128,8 +1185,8 @@
         async function loadDoctorsForDropdown() {
             try {
                 // Anyone authenticated can load doctors list
-                const res = await fetch('/api/admin/doctors', {
-                    headers: { 'Authorization': `Bearer ${authToken}`, 'Accept': 'application/json' }
+                const res = await fetch('/api/doctors', {
+                    headers: { 'Authorization': 'Bearer ' + authToken, 'Accept': 'application/json' }
                 });
                 if (res.ok) {
                     const data = await res.json();
@@ -1156,7 +1213,6 @@
         // Receptionist: Create Patient
         async function handleCreatePatient(e) {
             e.preventDefault();
-            const name = document.getElementById('pat-name').value;
             const phone = document.getElementById('pat-phone').value;
             const national_id = document.getElementById('pat-national-id').value;
             const date_of_birth = document.getElementById('pat-dob').value;
@@ -1167,16 +1223,16 @@
                 const res = await fetch('/api/patients', {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${authToken}`,
+                        'Authorization': 'Bearer ' + authToken,
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                     },
-                    body: JSON.stringify({ name, phone, national_id, date_of_birth, gender, address })
+                    body: JSON.stringify({ phone, national_id, date_of_birth, gender, address })
                 });
                 const data = await res.json();
                 if (!res.ok) throw new Error(data.message || 'فشل تسجيل المريض');
 
-                showNotification('تم تسجيل المريض بنجاح.', 'success');
+                showNotification('تم تسجيل المريض وربط ملفه بحسابك بنجاح.', 'success');
                 document.getElementById('create-patient-form').reset();
                 await loadPatients();
             } catch (err) {
@@ -1207,7 +1263,7 @@
                 const res = await fetch('/api/appointments', {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${authToken}`,
+                        'Authorization': 'Bearer ' + authToken,
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                     },
@@ -1228,7 +1284,7 @@
         async function loadAppointments() {
             try {
                 const res = await fetch('/api/appointments', {
-                    headers: { 'Authorization': `Bearer ${authToken}`, 'Accept': 'application/json' }
+                    headers: { 'Authorization': 'Bearer ' + authToken, 'Accept': 'application/json' }
                 });
                 if (res.ok) {
                     const data = await res.json();
@@ -1292,7 +1348,7 @@
                 const res = await fetch(`/api/appointments/${id}/status`, {
                     method: 'PATCH',
                     headers: {
-                        'Authorization': `Bearer ${authToken}`,
+                        'Authorization': 'Bearer ' + authToken,
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                     },
@@ -1340,7 +1396,7 @@
                 const res = await fetch('/api/invoices', {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${authToken}`,
+                        'Authorization': 'Bearer ' + authToken,
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                     },
@@ -1361,7 +1417,7 @@
         async function loadInvoices() {
             try {
                 const res = await fetch('/api/invoices', {
-                    headers: { 'Authorization': `Bearer ${authToken}`, 'Accept': 'application/json' }
+                    headers: { 'Authorization': 'Bearer ' + authToken, 'Accept': 'application/json' }
                 });
                 if (res.ok) {
                     const data = await res.json();
@@ -1451,7 +1507,7 @@
                 const res = await fetch(`/api/invoices/${id}/discount`, {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${authToken}`,
+                        'Authorization': 'Bearer ' + authToken,
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                     },
@@ -1489,7 +1545,7 @@
                 const res = await fetch(`/api/invoices/${id}/pay`, {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${authToken}`,
+                        'Authorization': 'Bearer ' + authToken,
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                     },
@@ -1526,7 +1582,7 @@
                 const res = await fetch(`/api/invoices/${id}/refund`, {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${authToken}`,
+                        'Authorization': 'Bearer ' + authToken,
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                     },
@@ -1547,10 +1603,12 @@
         async function loadDoctorAppointments() {
             try {
                 const res = await fetch('/api/appointments', {
-                    headers: { 'Authorization': `Bearer ${authToken}`, 'Accept': 'application/json' }
+                    headers: { 'Authorization': 'Bearer ' + authToken, 'Accept': 'application/json' }
                 });
                 if (res.ok) {
                     const data = await res.json();
+                    cachedDoctorAppointments = data.data;
+                    updateMedicalRecordAppointments();
                     const container = document.getElementById('doctor-appointments-list');
                     if (data.data.length === 0) {
                         container.innerHTML = '<p class="text-xs text-slate-400">لا توجد كشوفات محجوزة حالياً.</p>';
@@ -1589,6 +1647,163 @@
                     }).join('');
                 }
             } catch (e) { console.error(e); }
+        }
+
+        function updateMedicalRecordAppointments() {
+            const selector = document.getElementById('record-appointment-id');
+            if (!selector) return;
+
+            const options = cachedDoctorAppointments
+                .filter(appointment => ['pending', 'confirmed', 'completed'].includes(appointment.status))
+                .map(appointment => `<option value="${appointment.id}">${appointment.patient?.name || 'name'} - ${new Date(appointment.appointment_date).toLocaleString('ar-EG')}</option>`)
+                .join('');
+
+            selector.innerHTML = options || '<option value="">لا توجد مواعيد مناسبة لتسجيل زيارة</option>';
+            selector.disabled = !options;
+        }
+
+        async function handleCreateMedicalRecord(event) {
+            event.preventDefault();
+            const appointmentId = Number(document.getElementById('record-appointment-id').value);
+            const appointment = cachedDoctorAppointments.find(item => item.id === appointmentId);
+
+            if (!appointment) {
+                showNotification('اختر موعدًا صالحًا للمريض.', 'error');
+                return;
+            }
+
+            const followUp = document.getElementById('record-follow-up').value;
+            const payload = {
+                patient_id: appointment.patient_id,
+                appointment_id: appointment.id,
+                visit_date: new Date().toISOString(),
+                chief_complaint: document.getElementById('record-chief-complaint').value,
+                medical_history: document.getElementById('record-medical-history').value,
+                examination: document.getElementById('record-examination').value,
+                diagnosis: document.getElementById('record-diagnosis').value,
+                treatment_plan: document.getElementById('record-treatment-plan').value,
+                follow_up_at: followUp || null
+            };
+
+            try {
+                const response = await fetch('/api/medical-records', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + authToken,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                if (!response.ok) throw new Error(result.message || 'تعذر حفظ السجل الطبي');
+
+                activeMedicalRecordId = result.data.id;
+                document.getElementById('clinical-workflow-panel').classList.remove('hidden');
+                document.getElementById('clinical-record-reference').textContent =
+                    `المريض ${result.data.patient.name}، رقم السجل ${activeMedicalRecordId}`;
+                showNotification('تم حفظ السجل الطبي.', 'success');
+            } catch (error) {
+                showNotification(error.message, 'error');
+            }
+        }
+
+        async function handleCreatePrescription(event) {
+            event.preventDefault();
+            if (!activeMedicalRecordId) {
+                showNotification('احفظ السجل الطبي أولاً.', 'error');
+                return;
+            }
+
+            const payload = {
+                notes: document.getElementById('prescription-notes').value,
+                items: [{
+                    medicine_name: document.getElementById('prescription-medicine').value,
+                    dosage: document.getElementById('prescription-dosage').value,
+                    frequency: document.getElementById('prescription-frequency').value,
+                    duration: document.getElementById('prescription-duration').value,
+                    quantity: Number(document.getElementById('prescription-quantity').value),
+                    instructions: document.getElementById('prescription-instructions').value
+                }]
+            };
+
+            try {
+                const response = await fetch(`/api/medical-records/${activeMedicalRecordId}/prescriptions`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + authToken,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                if (!response.ok) throw new Error(result.message || 'تعذر إصدار الوصفة');
+
+                event.target.reset();
+                showNotification(`تم إصدار الوصفة رقم ${result.data.id}.`, 'success');
+            } catch (error) {
+                showNotification(error.message, 'error');
+            }
+        }
+
+        async function handleCreateDiagnosticOrder(event) {
+            event.preventDefault();
+            if (!activeMedicalRecordId) {
+                showNotification('احفظ السجل الطبي أولاً.', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/medical-records/${activeMedicalRecordId}/diagnostic-orders`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + authToken,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        type: document.getElementById('diagnostic-type').value,
+                        test_name: document.getElementById('diagnostic-test-name').value,
+                        instructions: document.getElementById('diagnostic-instructions').value
+                    })
+                });
+                const result = await response.json();
+                if (!response.ok) throw new Error(result.message || 'تعذر إرسال طلب الفحص');
+
+                document.getElementById('diagnostic-order-id').value = result.data.id;
+                event.target.reset();
+                document.getElementById('diagnostic-order-id').value = result.data.id;
+                showNotification(`تم إنشاء طلب الفحص رقم ${result.data.id}.`, 'success');
+            } catch (error) {
+                showNotification(error.message, 'error');
+            }
+        }
+
+        async function handleUpdateDiagnosticOrder(event) {
+            event.preventDefault();
+            const orderId = document.getElementById('diagnostic-order-id').value;
+
+            try {
+                const response = await fetch(`/api/diagnostic-orders/${orderId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Authorization': 'Bearer ' + authToken,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        status: document.getElementById('diagnostic-order-status').value,
+                        result: document.getElementById('diagnostic-result').value || null
+                    })
+                });
+                const result = await response.json();
+                if (!response.ok) throw new Error(result.message || 'تعذر تحديث نتيجة الفحص');
+
+                showNotification('تم تحديث حالة ونتيجة الفحص.', 'success');
+            } catch (error) {
+                showNotification(error.message, 'error');
+            }
         }
 
         // Global Alert Helper

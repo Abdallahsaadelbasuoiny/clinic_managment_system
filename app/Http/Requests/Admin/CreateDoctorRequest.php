@@ -16,11 +16,9 @@ class CreateDoctorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'      => ['required', 'string', 'max:255'],
             'email'     => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'phone'     => ['nullable', 'string', 'max:50'],
             'password'  => ['required', 'string', 'min:8'],
-            'clinic_id' => ['nullable', 'integer', 'exists:clinics,id'],
         ];
     }
 }

@@ -16,7 +16,6 @@ class CreatePatientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'          => ['required', 'string', 'max:255'],
             'phone'         => ['required', 'string', 'max:50'],
             'national_id'   => ['nullable', 'string', 'max:50'],
             'date_of_birth' => ['nullable', 'date'],

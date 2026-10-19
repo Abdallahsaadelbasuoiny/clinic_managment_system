@@ -17,7 +17,15 @@ class Clinic extends Model
         'phone',
         'address',
         'status',
+        'services',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'services' => 'array',
+        ];
+    }
 
     public function users(): HasMany
     {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Requests\Invoice;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateInvoiceRequest extends FormRequest
 {
@@ -16,8 +17,11 @@ class CreateInvoiceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'patient_id'        => ['required', 'integer', 'exists:patients,id'],
-            'clinic_id'         => ['nullable', 'integer', 'exists:clinics,id'],
+            'patient_id'        => [
+                'required',
+                'integer',
+                Rule::exists('patients', 'id')->where('clinic_id', $this->user()->clinic_id),
+            ],
             'discount'          => ['nullable', 'numeric', 'min:0'],
             'discount_reason'   => ['nullable', 'string', 'max:255'],
             'doctor_share'      => ['nullable', 'numeric', 'min:0'],

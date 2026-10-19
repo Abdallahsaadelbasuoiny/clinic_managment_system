@@ -14,7 +14,6 @@ class RegisterUserAction
     {
         // حفظ المستخدم الجديد في قاعدة البيانات وتشفير كلمة المرور
         return User::create([
-            'name'     => $data->name,
             'email'    => $data->email,
             'password' => Hash::make($data->password),
         ]);

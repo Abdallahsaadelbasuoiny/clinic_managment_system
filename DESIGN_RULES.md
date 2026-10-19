@@ -93,3 +93,8 @@ Go through every line. Fix what fails.
 13. Is the hero headline above 56px, or any section over 96px of vertical padding?
 14. Does any element look oversized next to the text beside it?
 If a reviewer could tell this was generated in under five seconds, find the specific thing that gave it away and fix that.
+
+## 10. Person names
+- Never collect or store a person's real name.
+- Display anonymized labels in the form `name 1`, `name 2`, and so on for patients and staff.
+- Do not include personal names in sample data, UI copy, reports, or notifications.

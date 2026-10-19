@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class AdminUserController extends Controller
 {
@@ -22,7 +23,7 @@ class AdminUserController extends Controller
     {
         $doctors = User::query()
             ->where('role', User::ROLE_DOCTOR)
-            ->when($request->query('clinic_id'), fn($q, $cid) => $q->where('clinic_id', $cid))
+            ->where('clinic_id', $request->user()->clinic_id)
             ->orderBy('name')
             ->get();
 
@@ -40,8 +41,7 @@ class AdminUserController extends Controller
         $admin = $request->user();
 
         $doctor = User::create([
-            'clinic_id'            => $request->input('clinic_id', $admin->clinic_id),
-            'name'                 => $request->validated('name'),
+            'clinic_id'            => $admin->clinic_id,
             'email'                => $request->validated('email'),
             'phone'                => $request->validated('phone'),
             'password'             => Hash::make($request->validated('password')),
@@ -64,7 +64,7 @@ class AdminUserController extends Controller
     {
         $receptionists = User::query()
             ->where('role', User::ROLE_RECEPTIONIST)
-            ->when($request->query('clinic_id'), fn($q, $cid) => $q->where('clinic_id', $cid))
+            ->where('clinic_id', $request->user()->clinic_id)
             ->orderBy('name')
             ->get();
 
@@ -82,8 +82,7 @@ class AdminUserController extends Controller
         $admin = $request->user();
 
         $receptionist = User::create([
-            'clinic_id'            => $request->input('clinic_id', $admin->clinic_id),
-            'name'                 => $request->validated('name'),
+            'clinic_id'            => $admin->clinic_id,
             'email'                => $request->validated('email'),
             'phone'                => $request->validated('phone'),
             'password'             => Hash::make($request->validated('password')),
@@ -97,5 +96,51 @@ class AdminUserController extends Controller
             'message' => 'Receptionist profile created successfully.',
             'data'    => new AuthUserResource($receptionist),
         ], 201);
+    }
+
+    public function updateStaff(Request $request, int $id): JsonResponse
+    {
+        $admin = $request->user();
+        $staff = User::query()
+            ->where('clinic_id', $admin->clinic_id)
+            ->whereIn('role', [User::ROLE_DOCTOR, User::ROLE_RECEPTIONIST])
+            ->findOrFail($id);
+
+        $validated = $request->validate([
+            'email' => ['sometimes', 'required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($staff->id)],
+            'phone' => ['sometimes', 'nullable', 'string', 'max:50'],
+            'is_active' => ['sometimes', 'boolean'],
+            'password' => ['sometimes', 'nullable', 'string', 'min:8'],
+        ]);
+
+        if (filled($validated['password'] ?? null)) {
+            $validated['password'] = Hash::make($validated['password']);
+            $validated['must_change_password'] = true;
+        } else {
+            unset($validated['password']);
+        }
+
+        $staff->update($validated);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Staff profile updated successfully.',
+            'data' => new AuthUserResource($staff->refresh()),
+        ]);
+    }
+
+    public function listClinicDoctors(Request $request): JsonResponse
+    {
+        $doctors = User::query()
+            ->where('role', User::ROLE_DOCTOR)
+            ->where('clinic_id', $request->user()->clinic_id)
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'data' => AuthUserResource::collection($doctors),
+        ]);
     }
 }

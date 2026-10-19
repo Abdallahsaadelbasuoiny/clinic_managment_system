@@ -10,6 +10,7 @@ use App\Http\Requests\Appointment\UpdateAppointmentRequest;
 use App\Http\Requests\Appointment\UpdateAppointmentStatusRequest;
 use App\Http\Resources\AppointmentResource;
 use App\Models\Appointment;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class AppointmentController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $query = Appointment::query()
+        $query = $this->appointmentsVisibleTo($request)
             ->with(['patient', 'doctor', 'createdBy'])
             ->latest('appointment_date');
 
@@ -91,9 +92,11 @@ class AppointmentController extends Controller
     /**
      * Show appointment details.
      */
-    public function show(int $id): JsonResponse
+    public function show(Request $request, int $id): JsonResponse
     {
-        $appointment = Appointment::with(['patient', 'doctor', 'createdBy'])->findOrFail($id);
+        $appointment = $this->appointmentsVisibleTo($request)
+            ->with(['patient', 'doctor', 'createdBy'])
+            ->findOrFail($id);
 
         return response()->json([
             'status' => 'success',
@@ -106,7 +109,7 @@ class AppointmentController extends Controller
      */
     public function update(UpdateAppointmentRequest $request, int $id): JsonResponse
     {
-        $appointment = Appointment::findOrFail($id);
+        $appointment = $this->appointmentsVisibleTo($request)->findOrFail($id);
 
         if (in_array($appointment->status, [Appointment::STATUS_COMPLETED, Appointment::STATUS_CANCELLED], true)) {
             return response()->json([
@@ -131,7 +134,7 @@ class AppointmentController extends Controller
      */
     public function updateStatus(UpdateAppointmentStatusRequest $request, int $id): JsonResponse
     {
-        $appointment = Appointment::findOrFail($id);
+        $appointment = $this->appointmentsVisibleTo($request)->findOrFail($id);
         $newStatus = $request->validated('status');
 
         if (!$appointment->canTransitionTo($newStatus)) {
@@ -161,9 +164,9 @@ class AppointmentController extends Controller
     /**
      * Cancel an appointment.
      */
-    public function destroy(int $id): JsonResponse
+    public function destroy(Request $request, int $id): JsonResponse
     {
-        $appointment = Appointment::findOrFail($id);
+        $appointment = $this->appointmentsVisibleTo($request)->findOrFail($id);
         $appointment->status = Appointment::STATUS_CANCELLED;
         $appointment->save();
 
@@ -171,5 +174,16 @@ class AppointmentController extends Controller
             'status'  => 'success',
             'message' => 'Appointment has been cancelled.',
         ], 200);
+    }
+
+    private function appointmentsVisibleTo(Request $request): Builder
+    {
+        $query = Appointment::query();
+
+        if ($request->user()->isDoctor()) {
+            $query->where('doctor_id', $request->user()->id);
+        }
+
+        return $query;
     }
 }

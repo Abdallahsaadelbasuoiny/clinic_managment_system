@@ -78,13 +78,13 @@ class AuthApiTest extends TestCase
         ]);
 
         $response = $this->postJson('/api/auth/login', [
-            'username' => 'name 3',
+            'username' => $patient->name,
             'password' => 'secret123',
         ]);
 
         $response->assertStatus(200)
             ->assertJsonPath('user.role', 'patient')
-            ->assertJsonPath('user.name', 'name 3');
+            ->assertJsonPath('user.name', $patient->name);
     }
 
     public function test_login_fails_with_invalid_password(): void

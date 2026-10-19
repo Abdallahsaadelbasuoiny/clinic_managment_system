@@ -10,11 +10,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Concerns\AnonymizesName;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use AnonymizesName, HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     public const ROLE_OWNER = 'owner';
     public const ROLE_ADMIN = 'admin';

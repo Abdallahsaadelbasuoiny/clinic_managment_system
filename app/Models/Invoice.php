@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Concerns\BelongsToClinic;
 
 class Invoice extends Model
 {
-    use HasFactory, SoftDeletes;
+    use BelongsToClinic, HasFactory, SoftDeletes;
 
     public const STATUS_UNPAID = 'unpaid';
     public const STATUS_PAID = 'paid';

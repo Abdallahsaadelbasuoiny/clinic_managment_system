@@ -47,15 +47,14 @@ class PatientController extends Controller
     }
 
     /**
-     * Create a new patient profile (Receptionist exclusive).
+     * Create a patient profile and attribute it to the authenticated staff member.
      */
     public function store(CreatePatientRequest $request): JsonResponse
     {
         $user = $request->user();
 
         $patient = Patient::create([
-            'clinic_id'          => $request->input('clinic_id', $user->clinic_id),
-            'name'               => $request->validated('name'),
+            'clinic_id'          => $user->clinic_id,
             'phone'              => $request->validated('phone'),
             'national_id'        => $request->validated('national_id'),
             'date_of_birth'      => $request->validated('date_of_birth'),

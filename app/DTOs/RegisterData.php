@@ -9,7 +9,6 @@ use App\Http\Requests\RegisterRequest;
 readonly class RegisterData
 {
     public function __construct(
-        public string $name,
         public string $email,
         public string $password
     ) {}
@@ -18,7 +17,6 @@ readonly class RegisterData
     public static function fromRequest(RegisterRequest $request): self
     {
         return new self(
-            name: $request->validated('name'),
             email: $request->validated('email'),
             password: $request->validated('password')
         );
